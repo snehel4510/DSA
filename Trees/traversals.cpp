@@ -63,22 +63,7 @@ void path(Node *root, Node *n)
         cout << i << " ";
     cout << endl;
 }
-// to find all leaf nodes of a given binary tree
-void findLeafNode(Node *root)
-{
-    if (!root)
-        return;
-    if (!root->left && !root->right)
-    {
-        cout << root->data << "\t";
-        return;
-    }
-    if (root->right)
-        findLeafNode(root->right);
-    if (root->left)
-        findLeafNode(root->left);
-}
-// all root to leaf paths
+// all root-to-leaf paths
 
 int main()
 {
