@@ -17,6 +17,8 @@ struct Node
     }
 };
 // DFS or In/Pre/Post order traversals already done recursively in BST code
+// iterative In/Pre/Post order traversals in one function...
+
 // iterative BFS using stack
 void BFSi(Node *root)
 {
