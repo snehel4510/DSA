@@ -14,7 +14,7 @@ struct TreeNode
 };
 
 // to construct a binary tree based on a given inorder and preorder traversal
-class Solution
+class INPR
 {
 public:
     TreeNode *buildTree(vector<int> &pre, int ps, int pe, vector<int> &in, int is, int ie, unordered_map<int, int> &m)
@@ -43,7 +43,7 @@ public:
 };
 
 // to construct a binary tree based on a given inorder and postorder traversal
-class Solution
+class INPO
 {
 public:
     TreeNode *buildTree(vector<int> &post, int ps, int pe, vector<int> &in, int is, int ie, unordered_map<int, int> &m)
