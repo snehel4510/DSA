@@ -72,5 +72,5 @@ int main()
     return 0;
 }
 
-// all standard binary tree problems 👇
+// All standard binary-tree traversal problems 👇
 // https://www.geeksforgeeks.org/maximum-distinct-nodes-in-a-root-to-leaf-path/?ref=lbp
