@@ -3,12 +3,12 @@
 using namespace std;
 struct Node
 {
-    int data;
+    int val;
     struct Node *left;
     struct Node *right;
-    Node(int val)
+    Node(int data)
     {
-        data = val;
+        val = data;
         left = NULL;
         right = NULL;
     }
@@ -20,7 +20,7 @@ void findLeafNode(Node *root)
         return;
     if (!root->left && !root->right)
     {
-        cout << root->data << "\t";
+        cout << root->val << "\t";
         return;
     }
     if (root->right)
@@ -59,6 +59,38 @@ int widthOfBinaryTree(Node *root)
     }
     return ans;
 }
+
+// Finding the lowest common ancestor(LCA) of two nodes in a binary tree
+// root-to-node path traversal
+bool getPath(Node *root, int x, vector<Node *> &arr)
+{
+    if (root == NULL)
+        return false;
+    arr.push_back(root);
+    if (root->val == x)
+        return true;
+    if (getPath(root->left, x, arr) or getPath(root->right, x, arr))
+        return true;
+    arr.pop_back();
+    return false;
+}
+Node *lowestCommonAncestor(Node *root, Node *p, Node *q)
+{
+    if (root == NULL)
+        return root;
+    vector<Node *> p1, q1;
+    getPath(root, p->val, p1);
+    getPath(root, q->val, q1);
+    int i = 0;
+    while (i < p1.size() and i < q1.size())
+    {
+        if (p1[i]->val != q1[i]->val)
+            break;
+        i++;
+    }
+    return p1[i - 1];
+}
+
 int main()
 {
 
