@@ -31,7 +31,7 @@ void insert(bst **root, int x)
     }
 }
 
-// searching the elements elements
+// searching the elements
 
 bool search(bst *root, int x)
 {

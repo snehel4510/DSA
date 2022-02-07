@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 struct TreeNode
 {
     int val;
@@ -68,6 +69,27 @@ public:
             j++;
         }
         TreeNode *root = buildTree(post, 0, post.size() - 1, in, 0, in.size() - 1, m);
+        return root;
+    }
+};
+
+// constructing a BST from a given sorted array
+class Solution
+{
+public:
+    TreeNode *build(vector<int> &v, int s, int e, TreeNode *root)
+    {
+        if (s > e)
+            return NULL;
+        int m = (s + e) / 2;
+        root = new TreeNode(v[m]);
+        root->left = build(v, s, m - 1, root->left);
+        root->right = build(v, m + 1, e, root->right);
+        return root;
+    }
+    TreeNode *sortedArrayToBST(vector<int> &v)
+    {
+        TreeNode *root = build(v, 0, v.size() - 1, root);
         return root;
     }
 };
