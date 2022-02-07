@@ -13,6 +13,15 @@ struct Node
         right = NULL;
     }
 };
+
+// to find the heigth of a given node in a binary tree
+int height(Node *root)
+{
+    if (root == NULL)
+        return 0;
+    return 1 + max(height(root->left), height(root->right));
+}
+
 // to find all leaf nodes of a given binary tree
 void findLeafNode(Node *root)
 {
@@ -28,6 +37,7 @@ void findLeafNode(Node *root)
     if (root->left)
         findLeafNode(root->left);
 }
+
 // to find maximum width of a binary tree
 int widthOfBinaryTree(Node *root)
 {
