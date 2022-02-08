@@ -14,7 +14,6 @@ struct bst
 };
 
 // insertion of elements
-
 void insert(bst **root, int x)
 {
     if (*root == NULL)
@@ -32,7 +31,6 @@ void insert(bst **root, int x)
 }
 
 // searching the elements
-
 bool search(bst *root, int x)
 {
     if (root == NULL)
@@ -46,7 +44,6 @@ bool search(bst *root, int x)
 }
 
 // Tree traversals
-
 void inorder(bst *root)
 {
     if (root != NULL)
@@ -76,7 +73,6 @@ void postorder(bst *root)
 }
 
 // finding smallest value from the tree
-
 bst *find_min(bst *root)
 {
     bst *temp = root;
@@ -88,7 +84,6 @@ bst *find_min(bst *root)
 }
 
 // finding largest value from the tree
-
 bst *find_max(bst *root)
 {
     bst *temp = root;
@@ -100,7 +95,6 @@ bst *find_max(bst *root)
 }
 
 // deletion of a node from the BST
-
 bst *del(bst *root, int x)
 {
     if (root == NULL)
