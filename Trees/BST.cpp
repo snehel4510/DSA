@@ -165,23 +165,5 @@ void inorder_P_S(bst *root, bst *x, bst *&pre, bst *&suc)
 int main()
 {
     bst *root = NULL;
-    insert(&root, 15);
-    insert(&root, 10);
-    insert(&root, 20);
-    insert(&root, 25);
-    insert(&root, 8);
-    insert(&root, 12);
-    // cout << search(root, 25) << endl;
-    // cout << search(root, 17) << endl;
-    // cout << search(root, 15) << endl;
-    inorder(root);
-    cout << endl;
-    // preorder(root);
-    // cout << endl;
-    // postorder(root);
-    // cout << endl;
-    del(root, 15);
-    inorder(root);
-    cout << endl;
     return 0;
 }

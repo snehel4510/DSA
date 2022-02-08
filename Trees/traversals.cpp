@@ -1,6 +1,7 @@
 // Binary tree traversals - BFS, DFS, Level order, In/Pre/Post order, etc
 // BFS means level order traversal
 // DFS means root-to-leaf or leaf-to-root traversal using in/pre/post order traversals
+
 #include <bits/stdc++.h>
 using namespace std;
 // binary tree
@@ -16,8 +17,43 @@ struct Node
         right = NULL;
     }
 };
+
 // DFS or In/Pre/Post order traversals already done recursively in BST code
+
 // iterative In/Pre/Post order traversals in one function...
+vector<int> in, pre, post;
+void IterativeTraversal(Node *root)
+{
+    if (root == NULL)
+        return;
+    stack<pair<Node *, int>> s;
+    s.push({root, 1});
+    while (!s.empty())
+    {
+        auto p = s.top();
+        s.pop();
+        if (p.second == 1)
+        {
+            pre.push_back(p.first->data);
+            p.second++;
+            s.push(p);
+            if (p.first->left)
+                s.push({p.first->left, 1});
+        }
+        else if (p.second == 2)
+        {
+            in.push_back(p.first->data);
+            p.second++;
+            s.push(p);
+            if (p.first->right)
+                s.push({p.first->right, 1});
+        }
+        else if (p.second == 3)
+        {
+            post.push_back(p.first->data);
+        }
+    }
+}
 
 // iterative BFS using stack
 void BFSi(Node *root)
@@ -42,6 +78,7 @@ void BFSi(Node *root)
     }
     cout << endl;
 }
+
 // root-to-node path traversal
 bool getPath(Node *root, int x, vector<int> &arr)
 {
@@ -65,6 +102,7 @@ void path(Node *root, Node *n)
         cout << i << " ";
     cout << endl;
 }
+
 // all root-to-leaf paths
 
 int main()
