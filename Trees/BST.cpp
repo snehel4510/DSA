@@ -141,6 +141,33 @@ bst *del(bst *root, int x)
     return root;
 }
 
+// finding the inorder succesor/predecessor of a node in a BST
+bst *findIS(bst *root, bst *x, bst *ans)
+{
+    if (root == NULL)
+        return ans;
+    if (root->data <= x->data)
+        return findIS(root->rc, x, ans);
+    ans = root;
+    return findIS(root->lc, x, ans);
+}
+bst *findIP(bst *root, bst *x, bst *ans)
+{
+    if (root == NULL)
+        return ans;
+    if (root->data >= x->data)
+        return findIP(root->lc, x, ans);
+    ans = root;
+    return findIP(root->rc, x, ans);
+}
+void inorder_P_S(bst *root, bst *x, bst *&pre, bst *&suc)
+{
+    if (root == NULL or x == NULL)
+        return;
+    suc = findIS(root, x, NULL);
+    pre = findIS(root, x, NULL);
+}
+
 int main()
 {
     bst *root = NULL;
