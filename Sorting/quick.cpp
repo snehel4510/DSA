@@ -28,7 +28,7 @@ int partition(int a[], int s, int e)
         }
     }
     swap(a[pi], a[e]);
-    print(a);
+    //print(a);
     return pi;
 }
 
@@ -45,5 +45,6 @@ int main()
 {
     int a[10] = {2, 3, 7, 8, 1, 4, 6, 9, 0, 5};
     quick(a, 0, 9);
+    print(a);
     return 0;
 }
