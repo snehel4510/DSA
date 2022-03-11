@@ -6,7 +6,7 @@
 using namespace std;
 
 // maintains/restores the max-heap property
-void max_heapify(int a[], int i, int n) // O(logn)
+void max_heapify(vector<int> a, int i, int n) // O(logn)
 {
     int l = 2 * i;
     int r = 2 * i + 1;
@@ -24,14 +24,14 @@ void max_heapify(int a[], int i, int n) // O(logn)
 }
 
 // converting the given array into a max-heap
-void build_max_heap(int a[], int n) // O(nlogn)
+void build_max_heap(vector<int> a, int n) // O(nlogn)
 {
     for (int i = n / 2; i >= 1; i--) // the last n/2 elements are leaves
         max_heapify(a, i, n);
 }
 
 // sorting the given array using max-heap property
-void heap_sort(int a[], int n) // O(nlogn)
+void heap_sort(vector<int> a, int n) // O(nlogn)
 {
     build_max_heap(a, n);        // first convert the array into a max-heap
     for (int i = n; i >= 2; i--) // then extract the max element from the heap(i.e., root or the first element of the arrayy) and replace it with the last element
@@ -41,21 +41,65 @@ void heap_sort(int a[], int n) // O(nlogn)
     }
 }
 
+// to find the maximum element of the heap
+int heap_max(vector<int> a) // O(1)
+{
+    return a[1]; // root element
+}
+
+// to extract the maximum element(root) and remove it from the heap
+int extract_max(vector<int> a, int n) // O(logn)
+{
+    int m;
+    if (n < 1)
+        cout << "Heap underflow" << endl;
+    else
+    {
+        m = a[1];
+        swap(a[1], a[n]);
+        max_heapify(a, 1, n - 1);
+    }
+    return m;
+}
+
+// increase the value of key at index i to a new_val
+void increase_key(vector<int> a, int i, int key) // O(logn)
+{
+    if (key < a[i])
+        cout << "New key is smaller than current key" << endl;
+    else
+        a[i] = key;
+    while (i > 1 && a[i / 2] < a[i]) // if the parent is smaller than the child then swap them
+    {
+        swap(a[i], a[i / 2]);
+        i = i / 2;
+    }
+}
+
+// insert a new key in the heap
+void heap_insert(vector<int> a, int key, int n) // O(logn)
+{
+    a.push_back(INT_MIN); // adding a dummy element(with smallest possible value) at the end of the array
+    increase_key(a, n + 1, key);
+}
+
 int main()
 {
     int n;
     cin >> n;
-    int a[n + 1]; // we are taking 1 based indexing
+    vector<int> a(n + 1); // we are taking 1 based indexing
     for (int i = 1; i <= n; i++)
         cin >> a[i];
+
     build_max_heap(a, n);
-    // array after conversion into a max-heap
+    heap_max(a);
+    extract_max(a, n);
+    heap_sort(a, n);
+    increase_key(a, 5, 100);
+    heap_insert(a, 100, n);
+
     for (int i = 1; i <= n; i++)
         cout << a[i] << " ";
     cout << endl;
-    heap_sort(a, n);
-    // array after sorting (using heap-sort)
-    for (int i = 1; i <= n; i++)
-        cout << a[i] << " ";
     return 0;
 }
