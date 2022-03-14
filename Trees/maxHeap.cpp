@@ -67,7 +67,7 @@ int extract_max(vector<int> &a) // O(logn)
     if (n < 1)
     {
         cout << "Heap underflow" << endl;
-        return;
+        return -1;
     }
     else
     {
