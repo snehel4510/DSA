@@ -19,20 +19,32 @@ void merge(int a[], int l, int r, int m)
     {
         R[i] = a[m + 1 + i];
     }
-    L[n1] = R[n2] = INT_MAX;
-    int li = 0, ri = 0;
-    for (int i = l; i <= r; i++)
+    int li = 0, ri = 0, mi = l;
+    while (li < n1 and ri < n2)
     {
         if (L[li] <= R[ri])
         {
-            a[i] = L[li];
+            a[mi] = L[li];
             li++;
         }
         else
         {
-            a[i] = R[ri];
+            a[mi] = R[ri];
             ri++;
         }
+        mi++;
+    }
+    while (li < n1)
+    {
+        a[mi] = L[li];
+        li++;
+        mi++;
+    }
+    while (ri < n2)
+    {
+        a[mi] = R[ri];
+        ri++;
+        mi++;
     }
 }
 
