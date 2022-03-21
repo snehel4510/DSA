@@ -162,6 +162,37 @@ void inorder_P_S(bst *root, bst *x, bst *&pre, bst *&suc)
     pre = findIS(root, x, NULL);
 }
 
+// validating a BST
+class Solution
+{
+public:
+    vector<int> v;
+    void inorder(bst *root)
+    {
+        if (root != NULL)
+        {
+            inorder(root->lc);
+            v.push_back(root->data);
+            inorder(root->rc);
+        }
+    }
+    bool isValidBST(bst *root)
+    {
+        // if the inorder traversal of the tree is not sorted then the tree is not bst
+        if (root == NULL)
+            return true;
+        inorder(root);
+        int c = v[0];
+        for (int i = 1; i < v.size(); i++)
+        {
+            if (v[i] <= c)
+                return false;
+            c = v[i];
+        }
+        return true;
+    }
+};
+
 int main()
 {
     bst *root = NULL;

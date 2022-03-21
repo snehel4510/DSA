@@ -1,14 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
-double power(double a, double b)
+double power(double x, long long n)
 {
-    if (b == 0)
+    if (n == 0 or x == 1)
         return 1;
-
-    if (b < 0)
-        return (1.0 / a) * power(a, b + 1);
-
-    return a * power(a, b - 1);
+    if (n < 0)
+    {
+        n = -1 * n;
+        x = 1 / x;
+    }
+    if (n % 2 == 0)
+        return power(x * x, n / 2);
+    return x * power(x * x, n / 2);
 }
 int main()
 {

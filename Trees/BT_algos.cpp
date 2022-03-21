@@ -14,6 +14,31 @@ struct Node
     }
 };
 
+// to find max-depth of a given binary tree using queue (iterative approach)
+int height(Node *root)
+{
+    if (root == NULL)
+        return 0;
+    int ans = 0;
+    queue<Node *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        int s = q.size();
+        while (s--)
+        {
+            Node *node = q.front();
+            q.pop();
+            if (node->left)
+                q.push(node->left);
+            if (node->right)
+                q.push(node->right);
+        }
+        ans++;
+    }
+    return ans;
+}
+
 // to find the heigth of a given node in a binary tree
 int height(Node *root)
 {
@@ -68,6 +93,16 @@ int widthOfBinaryTree(Node *root)
         ans = max(ans, l - f + 1);
     }
     return ans;
+}
+
+// to find if 2 binary trees are same or not
+bool isSameTree(Node *p, Node *q)
+{
+    if (p == NULL and q == NULL)
+        return true;
+    if (p != NULL and q != NULL and (p->val == q->val))
+        return isSameTree(p->left, q->left) and isSameTree(p->right, q->right);
+    return false;
 }
 
 // Finding the lowest common ancestor(LCA) of two nodes in a binary tree
