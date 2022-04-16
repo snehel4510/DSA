@@ -14,6 +14,14 @@ struct Node
     }
 };
 
+// to find the sum of all nodes in a given Binary tree
+int sumOfNodes(Node *root)
+{
+    if (root == NULL)
+        return 0;
+    return root->val + sumOfNodes(root->left) + sumOfNodes(root->right);
+}
+
 // to find max-depth of a given binary tree using queue (iterative approach)
 int height(Node *root)
 {
