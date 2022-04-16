@@ -146,6 +146,25 @@ Node *LCA(Node *root, Node *p, Node *q)
     return root->left == NULL ? root->right : root->left;
 }
 
+// to find the length of the longest path between any 2 nodes in a binary tree
+int helper(Node *root, int &s)
+{
+    if (root == NULL)
+        return 0;
+    int l = helper(root->left, s);
+    int r = helper(root->right, s);
+    s = max(l + r, s);
+    return max(l, r) + 1;
+}
+int longestPath(Node *root)
+{
+    if (root == NULL)
+        return 0;
+    int s = 0;
+    helper(root, s);
+    return s;
+}
+
 int main()
 {
 
