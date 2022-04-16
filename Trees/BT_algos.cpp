@@ -113,6 +113,23 @@ bool isSameTree(Node *p, Node *q)
     return false;
 }
 
+// to find all root to leaf paths in a given binary tree
+void rootToLeafPaths(Node *root, vector<int> &path)
+{
+    if (root == NULL)
+        return;
+    path.push_back(root->val);
+    if (root->left == NULL and root->right == NULL)
+    {
+        for (int i = 0; i < path.size(); i++)
+            cout << path[i] << " ";
+        cout << endl;
+    }
+    rootToLeafPaths(root->left, path);
+    rootToLeafPaths(root->right, path);
+    path.pop_back();
+}
+
 // Finding the lowest common ancestor(LCA) of two nodes in a binary tree
 Node *LCA(Node *root, Node *p, Node *q)
 {
