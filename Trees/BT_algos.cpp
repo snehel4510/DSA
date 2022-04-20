@@ -55,6 +55,18 @@ int height(Node *root)
     return 1 + max(height(root->left), height(root->right));
 }
 
+// to find the minimum depth of a binary tree
+int minDepth(Node *root)
+{
+    if (root == NULL)
+        return 0;
+    int l = minDepth(root->left);
+    int r = minDepth(root->right);
+    if (root->left == NULL or root->right == NULL)
+        return 1 + max(l, r);
+    return 1 + min(l, r);
+}
+
 // to find all leaf nodes of a given binary tree
 void findLeafNode(Node *root)
 {
