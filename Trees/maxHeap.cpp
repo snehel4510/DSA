@@ -127,3 +127,105 @@ int main()
 
     return 0;
 }
+
+// some of the above code not working there, so check this code which is working completely fine
+#include <iostream>
+using namespace std;
+
+void print_heap(int a[], int n)
+{
+    for (int i = 1; i <= n; i++)
+        cout << a[i] << " ";
+    cout << endl;
+}
+
+void max_heapify(int a[], int n, int i)
+{
+    int l = 2 * i;
+    int r = 2 * i + 1;
+    int largest = i;
+    if (l <= n and a[l] > a[i])
+        largest = l;
+    if (r <= n and a[r] > a[largest])
+        largest = r;
+    if (largest != i)
+    {
+        swap(a[i], a[largest]);
+        max_heapify(a, n, largest);
+    }
+}
+
+void build_max_heap(int a[], int n)
+{
+    for (int i = n / 2; i >= 1; i--)
+    {
+        max_heapify(a, n, i);
+    }
+}
+
+void heap_sort(int a[], int n)
+{
+    build_max_heap(a, n);
+    for (int i = n; i >= 2; i--)
+    {
+        swap(a[1], a[i]);
+        max_heapify(a, i - 1, 1);
+    }
+}
+
+void increase_key(int a[], int i, int key, int n)
+{
+    if (i > n)
+        return;
+    a[i] = key;
+    while (i > 1 && a[i / 2] < a[i])
+    {
+        swap(a[i], a[i / 2]);
+        i = i / 2;
+    }
+}
+
+void heap_insert(int a[], int key, int &n)
+{
+    n++;
+    a[n] = INT_MIN;
+    increase_key(a, n, key, n);
+}
+
+int extract_max(int a[], int &n)
+{
+    int m;
+    if (n < 1)
+    {
+        cout << "Heap underflow" << endl;
+        return -1;
+    }
+    else
+    {
+        m = a[1];
+        swap(a[1], a[n]);
+        n--;
+        max_heapify(a, n, 1);
+    }
+    return m;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    int a[n + 1]; // 1 based indexing
+    for (int i = 1; i <= n; i++)
+        cin >> a[i];
+    build_max_heap(a, n);
+    print_heap(a, n);
+    cout << extract_max(a, n) << endl;
+    print_heap(a, n);
+    increase_key(a, 2, 100, n);
+    print_heap(a, n);
+    heap_insert(a, 16, n);
+    print_heap(a, n);
+    heap_sort(a, n);
+    print_heap(a, n);
+    return 0;
+}
