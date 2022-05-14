@@ -1,7 +1,7 @@
 // 1st APPROACH
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 1e5 + 10;
+const int N = 1e5 + 15;
 int w[110], p[110], dp[110][N];
 // in this approach, we are having weight and index of items as our DP states and are calculating how much value we are getting for each state
 int profit(int wt, int ind)
