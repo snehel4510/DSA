@@ -7,7 +7,7 @@ int val(int l, int price[], int n)
     if (l == 0)
         return 0;
     if (dp[l] != -1)
-        return dp[i];
+        return dp[l];
     int ans = 0;
     for (int i = 1; i <= n; i++)
     {
@@ -22,6 +22,7 @@ int cutRod(int price[], int n)
 }
 int main()
 {
+    memset(dp, -1, sizeof(dp));
     int n;
     cin >> n;
     int price[n];
