@@ -5,17 +5,17 @@ const int N = 1e3 + 10;
 int adj_mat[N][N];
 int main()
 {
-    int n, m;
-    // n vertices and m edges
-    cin >> n >> m;
+    int n, m, w;
+    // n vertices and m edges with weight W
+    cin >> n >> m >> w;
     // description of m edges
     while (m--)
     {
         int a, b;
         // vertex a is connected with vertex b (undirected)
         cin >> a >> b;
-        adj_mat[a][b] = 1;
-        adj_mat[b][a] = 1;
+        adj_mat[a][b] = w;
+        adj_mat[b][a] = w;
     }
     for (int i = 1; i <= n; i++)
     {
