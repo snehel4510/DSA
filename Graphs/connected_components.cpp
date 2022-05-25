@@ -21,16 +21,16 @@ void dfs(int v)
 }
 int main()
 {
-    int n, m;
-    cin >> n >> m;
-    while (m--)
+    int v, e;
+    cin >> v >> e;
+    while (e--)
     {
         int a, b;
         cin >> a >> b;
         g[a].push_back(b);
         g[b].push_back(a);
     }
-    for (int i = 1; i <= n; i++)
+    for (int i = 1; i <= v; i++)
     {
         // if a vertex is already visited before then it is already a part of some other connected component so it won't count in the cc since we will not call dfs on this vertex again
         if (vis[i])
