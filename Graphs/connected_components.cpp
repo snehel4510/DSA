@@ -4,9 +4,15 @@ using namespace std;
 const int N = 1e3 + 5;
 vector<int> g[N];
 bool vis[N];
+
+// to store each connect components seperately
+vector<vector<int>> cc;
+vector<int> c;
+
 void dfs(int v)
 {
     vis[v] = true;
+    c.push_back(v);
     for (auto u : g[v])
     {
         if (!vis[u])
@@ -24,16 +30,21 @@ int main()
         g[a].push_back(b);
         g[b].push_back(a);
     }
-    int ans = 0;
-    // ans is the number of times the DFS function is called
     for (int i = 1; i <= n; i++)
     {
-        // if a vertex is already visited before then it is already a part of some other connected component so it won't count in the ans since we will not call dfs on this vertex again
+        // if a vertex is already visited before then it is already a part of some other connected component so it won't count in the cc since we will not call dfs on this vertex again
         if (vis[i])
             continue;
+        c.clear();
         dfs(i);
-        ans++;
+        cc.push_back(c);
     }
-    cout << ans << endl;
+    cout << cc.size() << endl;
+    for (auto i : cc)
+    {
+        for (auto j : i)
+            cout << j << " ";
+        cout << endl;
+    }
     return 0;
 }
