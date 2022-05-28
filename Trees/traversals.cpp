@@ -103,7 +103,22 @@ void path(Node *root, Node *n)
     cout << endl;
 }
 
-// all root-to-leaf paths
+// to find all root to leaf paths in a given binary tree
+void rootToLeafPaths(Node *root, vector<int> &path)
+{
+    if (root == NULL)
+        return;
+    path.push_back(root->data);
+    if (root->left == NULL and root->right == NULL)
+    {
+        for (int i = 0; i < path.size(); i++)
+            cout << path[i] << " ";
+        cout << endl;
+    }
+    rootToLeafPaths(root->left, path);
+    rootToLeafPaths(root->right, path);
+    path.pop_back();
+}
 
 int main()
 {
