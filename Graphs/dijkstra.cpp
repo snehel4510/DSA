@@ -47,7 +47,7 @@ void dijkstra(int src, int n)
     }
     // print the distance of each node from the source
     for (int i = 1; i <= n; i++)
-        cout << i << " : " << dist[i] << " ";
+        cout << i << " : " << dist[i] << " " << endl;
 }
 int main()
 {
@@ -59,6 +59,8 @@ int main()
         cin >> a >> b >> w;
         g[a].push_back({b, w});
     }
-    dijkstra(1, n);
+    int k;
+    cin >> k;
+    dijkstra(k, n);
     return 0;
 }
