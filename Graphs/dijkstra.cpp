@@ -3,7 +3,7 @@ using namespace std;
 const int N = 1e5 + 5;
 // g[x] = {y,w} -> edge from vertex x to vertex y with weight w
 vector<pair<int, int>> g[N];
-void dijkstra(int src, int n)
+void dijkstra(int src, int n) // O(V+ElogV)
 {
     // visited array to check if the node is visited or not, initially all false
     vector<bool> vis(N, 0);
