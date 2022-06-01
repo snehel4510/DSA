@@ -39,8 +39,9 @@ int main()
         }
     }
     // to check if a graph contains any negative weight cycle(NWC) or not
-    flag = false;
     // looping through all the edges once more to check if an edge can still be relaxed, if yes, then NWC exists
+    vector<int> p(v);
+    int y = -1;
     for (int i = 0; i < e; i++)
     {
         int u = edges[i][0];
@@ -48,18 +49,35 @@ int main()
         int w = edges[i][2];
         if (dis[u] != INT_MAX && dis[v] > dis[u] + w)
         {
-            flag = true;
-            break;
+            dis[v] = dis[u] + w;
+            p[v] = u;
+            y = v;
         }
     }
-    if (flag)
+    if (y == -1)
     {
-        cout << "Graph contains negative weight cycle" << endl;
+        cout << "Graph does not contains negative weight cycle" << endl;
+        cout << "shortest distance of all vertices from the source vertex " << src << " :-" << endl;
+        for (int i = 0; i < v; i++)
+            cout << i << " : " << dis[i] << " " << endl;
         return 0;
     }
-    // shortest distance of all vertices from the source vertex
-    for (int i = 0; i < v; i++)
-        cout << i << " : " << dis[i] << " " << endl;
+    else
+    {
+        cout << "Negative weight cycle detected" << endl;
+        vector<int> cycle;
+        // looping through each parent of y since thay are a part of the negative weight cycle
+        for (int i = y;; i = p[i])
+        {
+            if (i == y and cycle.size() > 1)
+                break;
+            cycle.push_back(i);
+        }
+        reverse(cycle.begin(), cycle.end());
+        cout << "NWC is :- ";
+        for (auto i : cycle)
+            cout << i << " ";
+    }
     return 0;
 }
 
