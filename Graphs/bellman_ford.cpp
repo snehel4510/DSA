@@ -25,7 +25,7 @@ int main()
     }
     vector<int> dis(v, INT_MAX);
     dis[src] = 0;
-    // looping through all the edges |V-1| times
+    // looping through all the edges |V-1| times ensures the min distance for all vertices from source(only if there's no NWC)
     for (int i = 0; i < v - 1; i++)
     {
         for (int j = 0; j < e; j++)
