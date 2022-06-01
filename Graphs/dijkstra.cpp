@@ -33,9 +33,6 @@ void dijkstra(int src, int n) // O(V+ElogV)
         // for each children of the node
         for (auto child : g[v])
         {
-            // if the child is already visited then skip it
-            if (vis[child.first])
-                continue;
             // if the distance of child from the source is greater than the distance of parent v from the source + weight(parent v->child) then update the distance of the child
             if (dist[child.first] > dist[v] + child.second)
             {
