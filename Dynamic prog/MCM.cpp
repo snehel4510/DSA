@@ -47,6 +47,19 @@ using namespace std;
 const int N = 105;
 int m[N][N];
 int s[N][N];
+void print(int n, int i, int j)
+{
+    if (i == j)
+        cout << "A" << i;
+    else
+    {
+        cout << "(";
+        print(n, i, s[i][j]);
+        cout << "*";
+        print(n, s[i][j] + 1, j);
+        cout << ")";
+    }
+}
 int main()
 {
     // for n matrices -> total no of ways we can multiply them = (2nCn)/n+1
@@ -99,6 +112,8 @@ int main()
             cout << s[i][j] << " ";
         cout << endl;
     }
-    cout << "Minimum cost of multiplication is : " << m[1][n];
+    cout << "Minimum cost of multiplication is : " << m[1][n] << endl;
+    cout << "The matrices will be multiplied in the order : ";
+    print(n, 1, n);
     return 0;
 }
