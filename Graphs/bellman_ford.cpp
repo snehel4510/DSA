@@ -8,6 +8,7 @@ int main()
     cin >> v >> e >> src;
     // instead of using adjacency list we are taking all edges at once
     vector<vector<int>> edges(1);
+    vector<int> p1(v);
     int x = e;
     bool flag = true;
     while (x--)
@@ -35,7 +36,10 @@ int main()
             int w = edges[j][2]; // weight of the edge
             // relaxing the edge
             if (dis[u] != INT_MAX && dis[v] > dis[u] + w)
+            {
                 dis[v] = dis[u] + w;
+                p1[v] = u;
+            }
         }
     }
     // to check if a graph contains any negative weight cycle(NWC) or not
@@ -59,7 +63,21 @@ int main()
         cout << "Graph does not contains negative weight cycle" << endl;
         cout << "shortest distance of all vertices from the source vertex " << src << " :-" << endl;
         for (int i = 0; i < v; i++)
+        {
             cout << i << " : " << dis[i] << " " << endl;
+            if (i != src)
+            {
+                vector<int> par(p1.begin(), p1.end());
+                int j = i;
+                cout << "PATH :- " << j << "->";
+                while (par[j] != src)
+                {
+                    cout << par[j] << "->";
+                    j = par[j];
+                }
+                cout << src << endl;
+            }
+        }
         return 0;
     }
     else
