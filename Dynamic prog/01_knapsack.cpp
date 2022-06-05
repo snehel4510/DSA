@@ -67,3 +67,53 @@ int main()
     }
     return 0;
 }
+
+// O1 knapsack iterative bottom up
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n, W;
+    cin >> n >> W;
+    int w[n], p[n];
+    int dp[n + 1][W + 1];
+    for (int i = 0; i < n; i++)
+        cin >> w[i] >> p[i];
+    for (int i = 0; i <= n; i++)
+    {
+        for (int j = 0; j <= W; j++)
+        {
+            if (i == 0 or j == 0)
+                dp[i][j] = 0;
+            else if (w[i - 1] > j)
+                dp[i][j] = dp[i - 1][j];
+            else
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - w[i - 1]] + p[i - 1]);
+        }
+    }
+    for (int i = 0; i <= n; i++)
+    {
+        for (int j = 0; j <= W; j++)
+            cout << dp[i][j] << " ";
+        cout << endl;
+    }
+    // maximum profit obtained
+    cout << dp[n][W] << endl;
+    // printing the knapsack items
+    int i = n, j = W;
+    while (i >= 1)
+    {
+        while (j >= 1)
+        {
+            if (dp[i][j] == dp[i - 1][j])
+                i--;
+            else
+            {
+                cout << "Item" << i << " + ";
+                i--;
+                j -= w[i];
+            }
+        }
+    }
+    return 0;
+}
