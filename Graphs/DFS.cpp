@@ -32,3 +32,5 @@ int main()
     dfs(1);
     return 0;
 }
+
+// APPLICATIONS OF DFS
