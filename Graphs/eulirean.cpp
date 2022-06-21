@@ -4,13 +4,14 @@
 // 2)directed graphs -> at most 1 vertex has (in - out) degree equal = 1 and at most 1 vertex has (out - in) degree equal = 1 and all other vertices have same in and out degrees
 
 // eulirean circuit/cycle -> an eulirean path that starts and ends on the same vertex.
-// an eulirean circuit is also and eulirean path
 // **For an eulirean circuit to exist :-
 // 1)undirected graphs -> every vertex has even degree
 // 2)directed graphs -> every vertex have equal in and out degrees
 
 // All vertices with non-zero degree need to belong to same component
 // an eulirean path can have a unique start/end vertex but itself isn't always unique
+
+// an eulirean circuit is also an eulirean path. Just feed the graph(having an eulirean ckt) with the eulirean path algorithm and outcomes the eulirean circuit.
 
 // heirholzar's algorithm to find an eulirean path for a directed graph
 #include <bits/stdc++.h>
