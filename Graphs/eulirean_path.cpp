@@ -1,1 +1,0 @@
-// heirholzar's eulirean path algorithm
