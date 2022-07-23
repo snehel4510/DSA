@@ -6,7 +6,10 @@ using namespace std;
 struct Trie
 {
     map<char, Trie *> next;
-    bool isEnd = false;
+    // ends with
+    int ew = 0;
+    // count prefix
+    int cp = 0;
 };
 
 void insert(Trie *root, string word)
@@ -17,8 +20,9 @@ void insert(Trie *root, string word)
         if (!t->next[c])
             t->next[c] = new Trie();
         t = t->next[c];
+        t->cp++;
     }
-    t->isEnd = true;
+    t->ew++;
 }
 
 bool search(Trie *root, string word)
@@ -30,7 +34,7 @@ bool search(Trie *root, string word)
             return false;
         t = t->next[c];
     }
-    return t->isEnd;
+    return t->ew;
 }
 
 bool isPrefix(Trie *root, string word)
@@ -43,6 +47,26 @@ bool isPrefix(Trie *root, string word)
         t = t->next[c];
     }
     return true;
+}
+
+int countWords(Trie *root, string str)
+{
+    if (!search(root, str))
+        return 0;
+    Trie *curr = root;
+    for (char c : str)
+        curr = curr->next[c];
+    return curr->ew;
+}
+
+int countPrefix(Trie *root, string str)
+{
+    if (!isPrefix(root, str))
+        return 0;
+    Trie *curr = root;
+    for (char c : str)
+        curr = curr->next[c];
+    return curr->cp;
 }
 
 int main()
@@ -61,5 +85,7 @@ int main()
     cout << endl;
     search(root, str) ? cout << "YES" : cout << "NO";
     cout << endl;
+    cout << countWords(root, str) << endl;
+    cout << countPrefix(root, str) << endl;
     return 0;
 }

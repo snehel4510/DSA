@@ -6,7 +6,10 @@ using namespace std;
 struct Trie
 {
     Trie *next[26];
-    bool isEnd = false;
+    // ends with
+    int ew = 0;
+    // count prefix
+    int cp = 0;
 };
 
 void insert(Trie *root, string str)
@@ -18,8 +21,9 @@ void insert(Trie *root, string str)
         if (curr->next[c] == NULL)
             curr->next[c] = new Trie();
         curr = curr->next[c];
+        curr->cp++;
     }
-    curr->isEnd = true;
+    curr->ew++;
 }
 
 bool search(Trie *root, string str)
@@ -32,7 +36,7 @@ bool search(Trie *root, string str)
             return false;
         curr = curr->next[c];
     }
-    return curr->isEnd;
+    return curr->ew;
 }
 
 bool isPrefix(Trie *root, string str)
@@ -46,6 +50,46 @@ bool isPrefix(Trie *root, string str)
         curr = curr->next[c];
     }
     return true;
+}
+
+int countWords(Trie *root, string str)
+{
+    if (!search(root, str))
+        return 0;
+    Trie *curr = root;
+    for (char c : str)
+    {
+        c -= 'a';
+        curr = curr->next[c];
+    }
+    return curr->ew;
+}
+
+int countPrefix(Trie *root, string str)
+{
+    if (!isPrefix(root, str))
+        return 0;
+    Trie *curr = root;
+    for (char c : str)
+    {
+        c -= 'a';
+        curr = curr->next[c];
+    }
+    return curr->cp;
+}
+
+void deleteWord(Trie *root, string str)
+{
+    if (!search(root, str))
+        return;
+    Trie *curr = root;
+    for (char c : str)
+    {
+        c -= 'a';
+        curr = curr->next[c];
+        curr->cp--;
+    }
+    curr->ew--;
 }
 
 int main()
@@ -64,5 +108,7 @@ int main()
     cout << endl;
     search(root, str) ? cout << "YES" : cout << "NO";
     cout << endl;
+    cout << countWords(root, str) << endl;
+    cout << countPrefix(root, str) << endl;
     return 0;
 }
