@@ -37,5 +37,9 @@ int main()
     // toggle ith bit of n
     cout << "After toggling the " << i << "th bit of " << n << " : ";
     dtob(n ^ n1);
+
+    // to unset the right most set bit of n
+    cout << "After unsetting the right most bit of " << n << " : ";
+    dtob(n & (n - 1));
     return 0;
 }
