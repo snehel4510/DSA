@@ -1,4 +1,4 @@
-// prefix tree or Trie representation using hashmaps
+// a user searches for a word, find all words present in the trie whose prefix is that serach word
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -6,9 +6,7 @@ using namespace std;
 struct Trie
 {
     map<char, Trie *> next;
-    // ends with
     int ew = 0;
-    // count prefix
     int cp = 0;
 };
 
@@ -37,30 +35,13 @@ bool isWord(Trie *root, string word)
     return t->ew;
 }
 
-bool isPrefix(Trie *root, string word)
+void autocomplete(Trie *curr, string str, vector<string> &ans)
 {
-    Trie *t = root;
-    for (auto c : word)
-    {
-        if (!t->next[c])
-            return false;
-        t = t->next[c];
-    }
-    return true;
-}
-
-void autocomplete(Trie *root, string str, vector<string> &ans)
-{
-    if (isWord(root, str))
-    {
+    if (curr->ew)
         ans.push_back(str);
-        return;
-    }
-    Trie *curr = root;
-    for (char c : str)
-        curr = curr->next[c];
     for (auto &p : curr->next)
-        autocomplete(root, str + p.first, ans);
+        if (p.second)
+            autocomplete(curr->next[p.first], str + p.first, ans);
 }
 
 int main()
@@ -73,17 +54,16 @@ int main()
     Trie *root = new Trie();
     for (int i = 0; i < n; i++)
         insert(root, words[i]);
-    string prefix;
-    cin >> prefix;
-    if (!isPrefix(root, prefix))
-        cout << "No suggestions" << endl;
-    else
-    {
-        vector<string> ans;
-        autocomplete(root, prefix, ans);
-        cout << "autocomplete suggestions: " << endl;
-        for (auto &s : ans)
-            cout << s << endl;
-    }
+    // search word
+    string sw;
+    cin >> sw;
+    Trie *curr = root;
+    for (char c : sw)
+        curr = curr->next[c];
+    // suggestions
+    vector<string> sug;
+    autocomplete(curr, sw, sug);
+    for (auto i : sug)
+        cout << i << " ";
     return 0;
 }
