@@ -14,20 +14,21 @@ struct bst
 };
 
 // insertion of elements
-void insert(bst **root, int x)
-{
-    if (*root == NULL)
+bst* insert(bst* root, int x) {
+    if(root==NULL)
     {
-        *root = new bst(x);
-    }
-    else if (x < (*root)->data)
+        root=new bst(x);
+        return root;
+    }    
+    else if(x>root->data)
     {
-        insert(&((*root)->lc), x);
+        root->rc=insert(root->rc,x);
     }
-    else if (x > (*root)->data)
+    else
     {
-        insert(&((*root)->rc), x);
+        root->lc=insert(root->lc,x);
     }
+    return root;
 }
 
 // searching the elements
